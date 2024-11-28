@@ -32,12 +32,12 @@ function wcpd_add_retreat_start_date_field() {
     woocommerce_wp_text_input( array(
         'id'          => '_retreat_start_date',
         'label'       => __( 'Retreat Start Date', 'woocommerce-product-date' ),
-        'placeholder' => 'DD-MM-YYYY',
+        'placeholder' => 'YYYY-MM-DD',
         'type'        => 'text',
-        'description' => __( 'Enter the retreat start date in DD-MM-YYYY format.', 'woocommerce-product-date' ),
+        'description' => __( 'Enter the retreat start date in YYYY-MM-DD format.', 'woocommerce-product-date' ),
         'desc_tip'    => true,
         'custom_attributes' => array(
-            'pattern' => '\d{2}-\d{2}-\d{4}', // Validation for DD-MM-YYYY
+            'pattern' => '\d{2}-\d{2}-\d{4}', // Validation for YYYY-MM-DD
         ),
     ) );
     echo '</div>';
@@ -117,7 +117,7 @@ function wcpd_add_quick_edit_field( $column_name, $post_type ) {
             <div class="inline-edit-col">
                 <label class="inline-edit-group">
                     <span class="title"><?php _e( 'Retreat Start Date', 'woocommerce-product-date' ); ?></span>
-                    <input type="date" name="_retreat_start_date" class="retreat-start-date" placeholder="DD-MM-YYYY" value="">
+                    <input type="date" name="_retreat_start_date" class="retreat-start-date" placeholder="YYYY-MM-DD" value="">
                 </label>
             </div>
         </fieldset>
