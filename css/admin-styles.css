@@ -1,0 +1,15 @@
+/* Fix column width for "Retreat Start Date" in the admin product table */
+.wp-list-table .column-retreat_start_date {
+    width: 150px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Adjust the header for proper alignment */
+.wp-list-table th.column-retreat_start_date {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
