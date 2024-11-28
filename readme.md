@@ -1,70 +1,53 @@
 === WooCommerce Product Date ===
 Contributors: tokyographer
-Tags: woocommerce, custom field, date, product
+Tags: WooCommerce, Product Date, Retreat Start Date, REST API
 Requires at least: 5.0
 Tested up to: 6.3
-Stable tag: 1.0
-Requires PHP: 7.0
-License: GPL2 or later
+Stable tag: 1.7
+License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a custom "Retreat Start Date" date picker field to WooCommerce products, including support for Quick Edit, cart, checkout, orders, emails, and the WooCommerce REST API.
+Adds a custom "Retreat Start Date" field to WooCommerce products, including admin panel, cart, checkout, emails, and WooCommerce REST API.
 
 == Description ==
+This plugin allows you to set and manage a custom "Retreat Start Date" for WooCommerce products. The Retreat Start Date is displayed and integrated into:
+- The WooCommerce product edit page.
+- Quick Edit functionality for products.
+- The WooCommerce cart and checkout pages.
+- Order details, both in the admin and customer views.
+- Emails sent to the customer and admin.
+- WooCommerce REST API, including both product data and order line items.
 
-This plugin adds a custom date field called "Retreat Start Date" to WooCommerce products. The date can be set from the product edit page and via Quick Edit. The date is displayed on the product page, cart, checkout, order details, and in order emails. The field is also added to the WooCommerce REST API.
-
-**Features:**
-
-- Adds a date picker field to WooCommerce products.
-- Supports Quick Edit in the product list table.
-- Displays the date in the cart, checkout, and order details.
-- Saves the date to order item meta.
-- Displays the date in customer order emails.
-- Adds the field to the WooCommerce REST API.
-- Translatable and compatible with WPML and other translation plugins.
-- Includes basic error handling and logging.
+New Features in Version 1.7:
+- **Display in Cart, Checkout, and Emails**: The Retreat Start Date is displayed with the relevant product information.
+- **WooCommerce REST API Integration**: The Retreat Start Date is available in the REST API for products and orders.
+- **Product Categories in REST API**: Each line item in the WooCommerce REST API now includes the associated product categories.
 
 == Installation ==
-
-1. Upload the plugin files to the `/wp-content/plugins/woocommerce-product-date` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Edit any WooCommerce product to set the "Retreat Start Date".
-
-== Frequently Asked Questions ==
-
-= Where can I find the "Retreat Start Date" field? =
-
-You can find it on the product edit page under the "General" tab, and in the Quick Edit panel in the product list.
-
-= Is this plugin translatable? =
-
-Yes, the plugin is ready for translation and compatible with WPML and other translation plugins.
-
-== Screenshots ==
-
-1. Product edit page showing the "Retreat Start Date" field.
-2. Quick Edit panel with the "Retreat Start Date" field.
-3. Cart displaying the "Retreat Start Date".
+1. Upload the plugin folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Set the Retreat Start Date in the product edit screen under the "General" tab.
 
 == Changelog ==
 
-= 1.0 =
-* Initial release.
+= 1.7 =
+* Added product categories to WooCommerce REST API line items.
+* Displayed Retreat Start Date in cart, checkout, and order emails.
+* Integrated Retreat Start Date with WooCommerce REST API for products and orders.
 
-== Upgrade Notice ==
+= 1.6 =
+* Added support for Quick Edit functionality.
 
-= 1.0 =
-* Initial release.
+= 1.5 =
+* Initial release with Retreat Start Date field in the product edit page.
 
-== License ==
+== Frequently Asked Questions ==
 
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; version 2 of the License.
+= How do I add a Retreat Start Date to my products? =
+Go to the WooCommerce product edit page and find the "Retreat Start Date" field under the "General" tab.
 
-== Credits ==
+= Can I see the Retreat Start Date in the REST API? =
+Yes, the Retreat Start Date is included in both product and order data through the WooCommerce REST API.
 
-Developed by [https://github.com/tokyographer](https://github.com/tokyographer).
-
-== Additional Information ==
-
-For support and inquiries, please visit [https://github.com/tokyographer](https://github.com/tokyographer).
+= Can I use this for other custom fields? =
+This plugin is specifically designed for Retreat Start Date functionality but can be adapted for similar use cases.
