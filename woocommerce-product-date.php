@@ -147,3 +147,77 @@ function wcpd_save_quick_edit_field( $post_id ) {
     }
 }
 add_action( 'save_post', 'wcpd_save_quick_edit_field' );
+/**
+ * Add Retreat Start Date to cart item data.
+ */
+function wcpd_add_retreat_start_date_to_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
+    $retreat_start_date = get_post_meta( $product_id, '_retreat_start_date', true );
+    if ( ! empty( $retreat_start_date ) ) {
+        $cart_item_data['retreat_start_date'] = $retreat_start_date;
+        $cart_item_data['unique_key'] = md5( microtime() . rand() ); // Prevent merging items
+    }
+    return $cart_item_data;
+}
+add_filter( 'woocommerce_add_cart_item_data', 'wcpd_add_retreat_start_date_to_cart_item_data', 10, 3 );
+
+/**
+ * Display Retreat Start Date in cart and checkout.
+ */
+function wcpd_display_retreat_start_date_in_cart( $item_data, $cart_item ) {
+    if ( isset( $cart_item['retreat_start_date'] ) ) {
+        $item_data[] = array(
+            'key'   => __( 'Retreat Start Date', 'woocommerce-product-date' ),
+            'value' => wc_clean( $cart_item['retreat_start_date'] ),
+        );
+    }
+    return $item_data;
+}
+add_filter( 'woocommerce_get_item_data', 'wcpd_display_retreat_start_date_in_cart', 10, 2 );
+
+/**
+ * Save Retreat Start Date to order item meta.
+ */
+function wcpd_add_retreat_start_date_to_order_meta( $item, $cart_item_key, $values, $order ) {
+    if ( isset( $values['retreat_start_date'] ) ) {
+        $item->add_meta_data( __( 'Retreat Start Date', 'woocommerce-product-date' ), $values['retreat_start_date'], true );
+    }
+}
+add_action( 'woocommerce_checkout_create_order_line_item', 'wcpd_add_retreat_start_date_to_order_meta', 10, 4 );
+
+/**
+ * Display Retreat Start Date in order emails.
+ */
+function wcpd_add_retreat_start_date_to_order_email( $fields, $sent_to_admin, $order ) {
+    foreach ( $order->get_items() as $item_id => $item ) {
+        if ( $item->get_meta( 'Retreat Start Date' ) ) {
+            $fields['retreat_start_date'] = array(
+                'label' => __( 'Retreat Start Date', 'woocommerce-product-date' ),
+                'value' => $item->get_meta( 'Retreat Start Date' ),
+            );
+        }
+    }
+    return $fields;
+}
+add_filter( 'woocommerce_email_order_meta_fields', 'wcpd_add_retreat_start_date_to_order_email', 10, 3 );
+
+/**
+ * Add Retreat Start Date to WooCommerce REST API.
+ */
+function wcpd_register_retreat_start_date_rest_field() {
+    register_rest_field( 'product', 'retreat_start_date', array(
+        'get_callback'    => function ( $object ) {
+            return get_post_meta( $object['id'], '_retreat_start_date', true );
+        },
+        'update_callback' => function ( $value, $object ) {
+            if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $value ) ) {
+                update_post_meta( $object->ID, '_retreat_start_date', sanitize_text_field( $value ) );
+            }
+        },
+        'schema'          => array(
+            'description' => __( 'Retreat Start Date in YYYY-MM-DD format', 'woocommerce-product-date' ),
+            'type'        => 'string',
+            'context'     => array( 'view', 'edit' ),
+        ),
+    ) );
+}
+add_action( 'rest_api_init', 'wcpd_register_retreat_start_date_rest_field' );
