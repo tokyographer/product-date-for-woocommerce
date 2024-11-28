@@ -1,49 +1,51 @@
-=== Woocommerce Product Date ===
+=== WooCommerce Product Date ===
 Contributors: tokyographer
-Tags: woocommerce, product, custom field, date, retreat start date
+Tags: woocommerce, custom field, date, product
 Requires at least: 5.0
 Tested up to: 6.3
-Requires PHP: 7.0
 Stable tag: 1.0
-License: GPLv2 or later
+Requires PHP: 7.0
+License: GPL2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a custom "Retreat Start Date" field to WooCommerce products, Quick Edit, orders, emails, and the WooCommerce REST API.
+Adds a custom "Retreat Start Date" date picker field to WooCommerce products, including support for Quick Edit, cart, checkout, orders, emails, and the WooCommerce REST API.
 
 == Description ==
 
-Woocommerce Product Date is a plugin that allows you to add a custom date field named "Retreat Start Date" to your WooCommerce products. It integrates with various parts of WooCommerce and WordPress:
+This plugin adds a custom date field called "Retreat Start Date" to WooCommerce products. The date can be set from the product edit page and via Quick Edit. The date is displayed on the product page, cart, checkout, order details, and in order emails. The field is also added to the WooCommerce REST API.
 
-- **Product Edit Page**: Adds the field to product edit pages.
-- **Quick Edit Support**: Allows quick editing of the date in the admin product list.
-- **Cart and Checkout Display**: Shows the date in cart and checkout pages.
-- **Order Details and Emails**: Displays the date in order details and customer emails.
-- **REST API Integration**: Adds the date field to the WooCommerce REST API.
-- **Translatable**: Fully translatable and compatible with WPML and other translation plugins.
-- **Error Handling and Logging**: Includes basic error handling and logging for debugging purposes.
+**Features:**
+
+- Adds a date picker field to WooCommerce products.
+- Supports Quick Edit in the product list table.
+- Displays the date in the cart, checkout, and order details.
+- Saves the date to order item meta.
+- Displays the date in customer order emails.
+- Adds the field to the WooCommerce REST API.
+- Translatable and compatible with WPML and other translation plugins.
+- Includes basic error handling and logging.
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/woocommerce-product-date` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Edit your products to set the "Retreat Start Date".
+3. Edit any WooCommerce product to set the "Retreat Start Date".
 
 == Frequently Asked Questions ==
 
-= How do I change the date format? =
+= Where can I find the "Retreat Start Date" field? =
 
-The date format follows the standard HTML5 date input format (YYYY-MM-DD).
+You can find it on the product edit page under the "General" tab, and in the Quick Edit panel in the product list.
 
-= Is this plugin compatible with my theme? =
+= Is this plugin translatable? =
 
-This plugin uses standard WooCommerce and WordPress hooks, so it should be compatible with most themes.
+Yes, the plugin is ready for translation and compatible with WPML and other translation plugins.
 
 == Screenshots ==
 
-1. Retreat Start Date field in the product edit page.
-2. Retreat Start Date column in the product list.
-3. Quick Edit field for Retreat Start Date.
-4. Retreat Start Date displayed in the cart.
+1. Product edit page showing the "Retreat Start Date" field.
+2. Quick Edit panel with the "Retreat Start Date" field.
+3. Cart displaying the "Retreat Start Date".
 
 == Changelog ==
 
@@ -53,8 +55,16 @@ This plugin uses standard WooCommerce and WordPress hooks, so it should be compa
 == Upgrade Notice ==
 
 = 1.0 =
-Initial release of Woocommerce Product Date.
+* Initial release.
 
 == License ==
 
-This plugin is licensed under the GPLv2 or later.
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; version 2 of the License.
+
+== Credits ==
+
+Developed by [https://github.com/tokyographer](https://github.com/tokyographer).
+
+== Additional Information ==
+
+For support and inquiries, please visit [https://github.com/tokyographer](https://github.com/tokyographer).
