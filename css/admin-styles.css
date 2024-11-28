@@ -14,3 +14,13 @@
     vertical-align: middle; /* Align text vertically */
     white-space: nowrap;
 }
+
+/* Quick Edit column alignment */
+.wp-list-table .column-retreat_start_date {
+    width: 150px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
