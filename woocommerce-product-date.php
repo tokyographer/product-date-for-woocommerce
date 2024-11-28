@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Product Date
 Plugin URI: https://github.com/tokyographer
 Description: Adds a custom "Retreat Start Date" field to WooCommerce products, Quick Edit, cart, checkout, orders, emails, and the WooCommerce REST API.
 Version: 1.4
-Author: https://github.com/tokyographer
+Author: tokyographer
 Text Domain: woocommerce-product-date
 Domain Path: /languages
 License: GPL2
