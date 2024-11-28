@@ -221,3 +221,23 @@ function wcpd_register_retreat_start_date_rest_field() {
     ) );
 }
 add_action( 'rest_api_init', 'wcpd_register_retreat_start_date_rest_field' );
+/**
+ * Add product category to WooCommerce REST API line items.
+ */
+function wcpd_add_category_to_order_items_rest_api( $response, $order, $request ) {
+    foreach ( $response->data['line_items'] as &$line_item ) {
+        $product_id = $line_item['product_id'];
+        $terms = get_the_terms( $product_id, 'product_cat' );
+        if ( $terms && ! is_wp_error( $terms ) ) {
+            $categories = array();
+            foreach ( $terms as $term ) {
+                $categories[] = $term->name;
+            }
+            $line_item['categories'] = $categories; // Add categories to the line item
+        } else {
+            $line_item['categories'] = array(); // Empty array if no categories exist
+        }
+    }
+    return $response;
+}
+add_filter( 'woocommerce_rest_prepare_shop_order_object', 'wcpd_add_category_to_order_items_rest_api', 10, 3 );
