@@ -32,27 +32,23 @@ function wcpd_add_retreat_start_date_field() {
     woocommerce_wp_text_input( array(
         'id'          => '_retreat_start_date',
         'label'       => __( 'Retreat Start Date', 'woocommerce-product-date' ),
-        'placeholder' => 'YYYY-MM-DD',
-        'type'        => 'text',
+        'placeholder' => 'YYYY-MM-DD', // Matches the expected format
+        'type'        => 'date', // Uses the browser-native date picker
         'description' => __( 'Enter the retreat start date in YYYY-MM-DD format.', 'woocommerce-product-date' ),
         'desc_tip'    => true,
-        'custom_attributes' => array(
-            'pattern' => '\d{2}-\d{2}-\d{4}', // Validation for YYYY-MM-DD
-        ),
     ) );
     echo '</div>';
 }
 add_action( 'woocommerce_product_options_general_product_data', 'wcpd_add_retreat_start_date_field' );
-
 /**
  * Save the Retreat Start Date field value.
  */
 function wcpd_save_retreat_start_date_field( $post_id ) {
     $retreat_start_date = isset( $_POST['_retreat_start_date'] ) ? sanitize_text_field( $_POST['_retreat_start_date'] ) : '';
-    if ( preg_match( '/\d{2}-\d{2}-\d{4}/', $retreat_start_date ) ) {
+    if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $retreat_start_date ) ) {
         update_post_meta( $post_id, '_retreat_start_date', $retreat_start_date );
     } else {
-        delete_post_meta( $post_id, '_retreat_start_date' ); // Clear if invalid
+        delete_post_meta( $post_id, '_retreat_start_date' ); // Clear invalid data
     }
 }
 add_action( 'woocommerce_process_product_meta', 'wcpd_save_retreat_start_date_field' );
