@@ -117,7 +117,7 @@ function wcpd_add_quick_edit_field( $column_name, $post_type ) {
             <div class="inline-edit-col">
                 <label class="inline-edit-group">
                     <span class="title"><?php _e( 'Retreat Start Date', 'woocommerce-product-date' ); ?></span>
-                    <input type="text" name="_retreat_start_date" class="retreat-start-date" placeholder="DD-MM-YYYY" value="">
+                    <input type="date" name="_retreat_start_date" class="retreat-start-date" placeholder="DD-MM-YYYY" value="">
                 </label>
             </div>
         </fieldset>
