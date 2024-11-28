@@ -1,4 +1,5 @@
 === WooCommerce Product Date ===
+
 Contributors: tokyographer
 Tags: WooCommerce, Product Date, Retreat Start Date, REST API
 Requires at least: 5.0
@@ -10,6 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Adds a custom "Retreat Start Date" field to WooCommerce products, including admin panel, cart, checkout, emails, and WooCommerce REST API.
 
 == Description ==
+
 This plugin allows you to set and manage a custom "Retreat Start Date" for WooCommerce products. The Retreat Start Date is displayed and integrated into:
 - The WooCommerce product edit page.
 - Quick Edit functionality for products.
@@ -24,6 +26,7 @@ New Features in Version 1.7:
 - **Product Categories in REST API**: Each line item in the WooCommerce REST API now includes the associated product categories.
 
 == Installation ==
+
 1. Upload the plugin folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Set the Retreat Start Date in the product edit screen under the "General" tab.
