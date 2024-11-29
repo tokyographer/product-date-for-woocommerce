@@ -241,3 +241,12 @@ function wcpd_add_category_to_order_items_rest_api( $response, $order, $request 
     return $response;
 }
 add_filter( 'woocommerce_rest_prepare_shop_order_object', 'wcpd_add_category_to_order_items_rest_api', 10, 3 );
+/**
+ * Add Populate Quick Edit Date.
+ */
+function wcpd_save_quick_edit_retreat_start_date( $post_id ) {
+    if ( isset( $_POST['_retreat_start_date'] ) ) {
+        update_post_meta( $post_id, '_retreat_start_date', sanitize_text_field( $_POST['_retreat_start_date'] ) );
+    }
+}
+add_action( 'save_post', 'wcpd_save_quick_edit_retreat_start_date' );
