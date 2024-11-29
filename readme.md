@@ -1,14 +1,14 @@
-=== WooCommerce Product Date ===
+=== Product Date for WooCommerce ===
 
 Contributors: tokyographer
 Tags: WooCommerce, Product Date, Retreat Start Date, REST API
 Requires at least: 5.0
-Tested up to: 6.3
+Tested up to: 6.7
 Stable tag: 1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a custom "Retreat Start Date" field to WooCommerce products, including admin panel, cart, checkout, emails, and WooCommerce REST API.
+Set and manage a "Retreat Start Date" for WooCommerce products. Integrates with admin panel, emails, cart, checkout, and WooCommerce REST API.
 
 == Description ==
 
