@@ -1,5 +1,5 @@
-/* Fix column width and styling for "Retreat Start Date" */
-.wp-list-table .column-retreat_start_date {
+/* Fix column width and styling for "Event Start Date" */
+.wp-list-table .column-event-start-date {
     width: 150px; /* Set fixed width */
     text-align: center; /* Center align text */
     vertical-align: middle; /* Align text vertically */
@@ -9,14 +9,14 @@
 }
 
 /* Style for the column header */
-.wp-list-table th.column-retreat_start_date {
+.wp-list-table th.column-event-start-date {
     text-align: center; /* Center align header text */
     vertical-align: middle; /* Align text vertically */
     white-space: nowrap;
 }
 
 /* Quick Edit column alignment */
-.wp-list-table .column-retreat_start_date {
+.wp-list-table .column-event-start-date {
     width: 150px;
     text-align: center;
     vertical-align: middle;

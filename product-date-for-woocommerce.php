@@ -2,7 +2,7 @@
 /*
 Plugin Name: Product Date for WooCommerce
 Plugin URI: https://github.com/tokyographer
-Description: Adds a custom "Retreat Start Date" field to WooCommerce products, including admin panel, Quick Edit, cart, checkout, emails, and REST API.
+Description: Adds a custom "Event Start Date" field to WooCommerce products, including admin panel, Quick Edit, cart, checkout, emails, and REST API.
 Version: 1.7
 Author: tokyographer
 Author URI: https://github.com/tokyographer
@@ -25,61 +25,61 @@ function wcpd_load_textdomain() {
 add_action( 'init', 'wcpd_load_textdomain' );
 
 /**
- * Add the Retreat Start Date field to the product edit page.
+ * Add the Event Start Date field to the product edit page.
  */
-function wcpd_add_retreat_start_date_field() {
+function wcpd_add_event_start_date_field() {
     echo '<div class="options_group">';
     woocommerce_wp_text_input( array(
-        'id'          => '_retreat_start_date',
-        'label'       => __( 'Retreat Start Date', 'product-date-for-woocommerce' ),
+        'id'          => '_event_start_date',
+        'label'       => __( 'Event Start Date', 'product-date-for-woocommerce' ),
         'placeholder' => 'YYYY-MM-DD', // Matches the expected format
         'type'        => 'date', // Uses the browser-native date picker
-        'description' => __( 'Enter the retreat start date in YYYY-MM-DD format.', 'product-date-for-woocommerce' ),
+        'description' => __( 'Enter the Event Start Date in YYYY-MM-DD format.', 'product-date-for-woocommerce' ),
         'desc_tip'    => true,
     ) );
     echo '</div>';
 }
-add_action( 'woocommerce_product_options_general_product_data', 'wcpd_add_retreat_start_date_field' );
+add_action( 'woocommerce_product_options_general_product_data', 'wcpd_add_event_start_date_field' );
 /**
- * Save the Retreat Start Date field value.
+ * Save the Event Start Date field value.
  */
-function wcpd_save_retreat_start_date_field( $post_id ) {
-    $retreat_start_date = isset( $_POST['_retreat_start_date'] ) ? sanitize_text_field( $_POST['_retreat_start_date'] ) : '';
-    if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $retreat_start_date ) ) {
-        update_post_meta( $post_id, '_retreat_start_date', $retreat_start_date );
+function wcpd_save_event_start_date_field( $post_id ) {
+    $event_start_date = isset( $_POST['_event_start_date'] ) ? sanitize_text_field( $_POST['_event_start_date'] ) : '';
+    if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $event_start_date ) ) {
+        update_post_meta( $post_id, '_event_start_date', $event_start_date );
     } else {
-        delete_post_meta( $post_id, '_retreat_start_date' ); // Clear invalid data
+        delete_post_meta( $post_id, '_event_start_date' ); // Clear invalid data
     }
 }
-add_action( 'woocommerce_process_product_meta', 'wcpd_save_retreat_start_date_field' );
+add_action( 'woocommerce_process_product_meta', 'wcpd_save_event_start_date_field' );
 
 /**
- * Add Retreat Start Date column to the admin product list table.
+ * Add Event Start Date column to the admin product list table.
  */
-function wcpd_add_retreat_start_date_column( $columns ) {
+function wcpd_add_event_start_date_column( $columns ) {
     $new_columns = array();
 
     foreach ( $columns as $key => $value ) {
         $new_columns[ $key ] = $value;
         if ( 'sku' === $key ) { // Add after SKU column
-            $new_columns['retreat_start_date'] = __( 'Retreat Start Date', 'product-date-for-woocommerce' );
+            $new_columns['event_start_date'] = __( 'Event Start Date', 'product-date-for-woocommerce' );
         }
     }
 
     return $new_columns;
 }
-add_filter( 'manage_edit-product_columns', 'wcpd_add_retreat_start_date_column' );
+add_filter( 'manage_edit-product_columns', 'wcpd_add_event_start_date_column' );
 
 /**
- * Populate the Retreat Start Date column in the product list.
+ * Populate the Event Start Date column in the product list.
  */
-function wcpd_show_retreat_start_date_column_content( $column, $post_id ) {
-    if ( 'retreat_start_date' === $column ) {
-        $retreat_start_date = get_post_meta( $post_id, '_retreat_start_date', true );
-        echo $retreat_start_date ? esc_html( $retreat_start_date ) : __( 'N/A', 'product-date-for-woocommerce' );
+function wcpd_show_event_start_date_column_content( $column, $post_id ) {
+    if ( 'event_start_date' === $column ) {
+        $event_start_date = get_post_meta( $post_id, '_event_start_date', true );
+        echo $event_start_date ? esc_html( $event_start_date ) : __( 'N/A', 'product-date-for-woocommerce' );
     }
 }
-add_action( 'manage_product_posts_custom_column', 'wcpd_show_retreat_start_date_column_content', 10, 2 );
+add_action( 'manage_product_posts_custom_column', 'wcpd_show_event_start_date_column_content', 10, 2 );
 
 /**
  * Enqueue admin styles and scripts for Quick Edit.
@@ -104,16 +104,16 @@ function wcpd_enqueue_admin_styles_and_scripts( $hook ) {
 add_action( 'admin_enqueue_scripts', 'wcpd_enqueue_admin_styles_and_scripts' );
 
 /**
- * Add Retreat Start Date field to Quick Edit.
+ * Add Event Start Date field to Quick Edit.
  */
 function wcpd_add_quick_edit_field( $column_name, $post_type ) {
-    if ( $column_name === 'retreat_start_date' && $post_type === 'product' ) {
+    if ( $column_name === 'event_start_date' && $post_type === 'product' ) {
         ?>
         <fieldset class="inline-edit-col-right">
             <div class="inline-edit-col">
                 <label class="inline-edit-group">
-                    <span class="title"><?php _e( 'Retreat Start Date', 'product-date-for-woocommerce' ); ?></span>
-                    <input type="date" name="_retreat_start_date" class="retreat-start-date" placeholder="YYYY-MM-DD" value="">
+                    <span class="title"><?php _e( 'Event Start Date', 'product-date-for-woocommerce' ); ?></span>
+                    <input type="date" name="_event_start_date" class="event-start-date" placeholder="YYYY-MM-DD" value="">
                 </label>
             </div>
         </fieldset>
@@ -127,11 +127,11 @@ add_action( 'quick_edit_custom_box', 'wcpd_add_quick_edit_field', 10, 2 );
  */
 function wcpd_add_quick_edit_hidden_data( $actions, $post ) {
     if ( $post->post_type === 'product' ) {
-        $retreat_start_date = get_post_meta( $post->ID, '_retreat_start_date', true );
+        $event_start_date = get_post_meta( $post->ID, '_event_start_date', true );
         $actions['inline hide-if-no-js'] .= sprintf(
-            '<span class="hidden" id="retreat_start_date_%d">%s</span>',
+            '<span class="hidden" id="event_start_date_%d">%s</span>',
             $post->ID,
-            esc_attr( $retreat_start_date )
+            esc_attr( $event_start_date )
         );
     }
     return $actions;
@@ -139,88 +139,88 @@ function wcpd_add_quick_edit_hidden_data( $actions, $post ) {
 add_filter( 'post_row_actions', 'wcpd_add_quick_edit_hidden_data', 10, 2 );
 
 /**
- * Save Retreat Start Date from Quick Edit.
+ * Save Event Start Date from Quick Edit.
  */
 function wcpd_save_quick_edit_field( $post_id ) {
-    if ( isset( $_POST['_retreat_start_date'] ) ) {
-        update_post_meta( $post_id, '_retreat_start_date', sanitize_text_field( $_POST['_retreat_start_date'] ) );
+    if ( isset( $_POST['_event_start_date'] ) ) {
+        update_post_meta( $post_id, '_event_start_date', sanitize_text_field( $_POST['_event_start_date'] ) );
     }
 }
 add_action( 'save_post', 'wcpd_save_quick_edit_field' );
 /**
- * Add Retreat Start Date to cart item data.
+ * Add Event Start Date to cart item data.
  */
-function wcpd_add_retreat_start_date_to_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
-    $retreat_start_date = get_post_meta( $product_id, '_retreat_start_date', true );
-    if ( ! empty( $retreat_start_date ) ) {
-        $cart_item_data['retreat_start_date'] = $retreat_start_date;
+function wcpd_add_event_start_date_to_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
+    $event_start_date = get_post_meta( $product_id, '_event_start_date', true );
+    if ( ! empty( $event_start_date ) ) {
+        $cart_item_data['event_start_date'] = $event_start_date;
         $cart_item_data['unique_key'] = md5( microtime() . wp_rand() ); // Prevent merging items
     }
     return $cart_item_data;
 }
-add_filter( 'woocommerce_add_cart_item_data', 'wcpd_add_retreat_start_date_to_cart_item_data', 10, 3 );
+add_filter( 'woocommerce_add_cart_item_data', 'wcpd_add_event_start_date_to_cart_item_data', 10, 3 );
 
 /**
- * Display Retreat Start Date in cart and checkout.
+ * Display Event Start Date in cart and checkout.
  */
-function wcpd_display_retreat_start_date_in_cart( $item_data, $cart_item ) {
-    if ( isset( $cart_item['retreat_start_date'] ) ) {
+function wcpd_display_event_start_date_in_cart( $item_data, $cart_item ) {
+    if ( isset( $cart_item['event_start_date'] ) ) {
         $item_data[] = array(
-            'key'   => __( 'Retreat Start Date', 'product-date-for-woocommerce' ),
-            'value' => wc_clean( $cart_item['retreat_start_date'] ),
+            'key'   => __( 'Event Start Date', 'product-date-for-woocommerce' ),
+            'value' => wc_clean( $cart_item['event_start_date'] ),
         );
     }
     return $item_data;
 }
-add_filter( 'woocommerce_get_item_data', 'wcpd_display_retreat_start_date_in_cart', 10, 2 );
+add_filter( 'woocommerce_get_item_data', 'wcpd_display_event_start_date_in_cart', 10, 2 );
 
 /**
- * Save Retreat Start Date to order item meta.
+ * Save Event Start Date to order item meta.
  */
-function wcpd_add_retreat_start_date_to_order_meta( $item, $cart_item_key, $values, $order ) {
-    if ( isset( $values['retreat_start_date'] ) ) {
-        $item->add_meta_data( __( 'Retreat Start Date', 'product-date-for-woocommerce' ), $values['retreat_start_date'], true );
+function wcpd_add_event_start_date_to_order_meta( $item, $cart_item_key, $values, $order ) {
+    if ( isset( $values['event_start_date'] ) ) {
+        $item->add_meta_data( __( 'Event Start Date', 'product-date-for-woocommerce' ), $values['event_start_date'], true );
     }
 }
-add_action( 'woocommerce_checkout_create_order_line_item', 'wcpd_add_retreat_start_date_to_order_meta', 10, 4 );
+add_action( 'woocommerce_checkout_create_order_line_item', 'wcpd_add_event_start_date_to_order_meta', 10, 4 );
 
 /**
- * Display Retreat Start Date in order emails.
+ * Display Event Start Date in order emails.
  */
-function wcpd_add_retreat_start_date_to_order_email( $fields, $sent_to_admin, $order ) {
+function wcpd_add_event_start_date_to_order_email( $fields, $sent_to_admin, $order ) {
     foreach ( $order->get_items() as $item_id => $item ) {
-        if ( $item->get_meta( 'Retreat Start Date' ) ) {
-            $fields['retreat_start_date'] = array(
-                'label' => __( 'Retreat Start Date', 'product-date-for-woocommerce' ),
-                'value' => $item->get_meta( 'Retreat Start Date' ),
+        if ( $item->get_meta( 'Event Start Date' ) ) {
+            $fields['event_start_date'] = array(
+                'label' => __( 'Event Start Date', 'product-date-for-woocommerce' ),
+                'value' => $item->get_meta( 'Event Start Date' ),
             );
         }
     }
     return $fields;
 }
-add_filter( 'woocommerce_email_order_meta_fields', 'wcpd_add_retreat_start_date_to_order_email', 10, 3 );
+add_filter( 'woocommerce_email_order_meta_fields', 'wcpd_add_event_start_date_to_order_email', 10, 3 );
 
 /**
- * Add Retreat Start Date to WooCommerce REST API.
+ * Add Event Start Date to WooCommerce REST API.
  */
-function wcpd_register_retreat_start_date_rest_field() {
-    register_rest_field( 'product', 'retreat_start_date', array(
+function wcpd_register_event_start_date_rest_field() {
+    register_rest_field( 'product', 'event_start_date', array(
         'get_callback'    => function ( $object ) {
-            return get_post_meta( $object['id'], '_retreat_start_date', true );
+            return get_post_meta( $object['id'], '_event_start_date', true );
         },
         'update_callback' => function ( $value, $object ) {
             if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $value ) ) {
-                update_post_meta( $object->ID, '_retreat_start_date', sanitize_text_field( $value ) );
+                update_post_meta( $object->ID, '_event_start_date', sanitize_text_field( $value ) );
             }
         },
         'schema'          => array(
-            'description' => __( 'Retreat Start Date in YYYY-MM-DD format', 'product-date-for-woocommerce' ),
+            'description' => __( 'Event Start Date in YYYY-MM-DD format', 'product-date-for-woocommerce' ),
             'type'        => 'string',
             'context'     => array( 'view', 'edit' ),
         ),
     ) );
 }
-add_action( 'rest_api_init', 'wcpd_register_retreat_start_date_rest_field' );
+add_action( 'rest_api_init', 'wcpd_register_event_start_date_rest_field' );
 /**
  * Add product category to WooCommerce REST API line items.
  */
