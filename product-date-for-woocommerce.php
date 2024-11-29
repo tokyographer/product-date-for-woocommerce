@@ -154,7 +154,7 @@ function wcpd_add_retreat_start_date_to_cart_item_data( $cart_item_data, $produc
     $retreat_start_date = get_post_meta( $product_id, '_retreat_start_date', true );
     if ( ! empty( $retreat_start_date ) ) {
         $cart_item_data['retreat_start_date'] = $retreat_start_date;
-        $cart_item_data['unique_key'] = md5( microtime() . rand() ); // Prevent merging items
+        $cart_item_data['unique_key'] = md5( microtime() . wp_rand() ); // Prevent merging items
     }
     return $cart_item_data;
 }
